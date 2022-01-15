@@ -21,21 +21,20 @@
     cursor: pointer;
     display: grid;
     place-content: center;
+    &::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        background-color: CanvasText;
+    }
+    &:checked::before {
+        transform: scale(1);
+    }
 }
 
-.radioBtn::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    transform: scale(0);
-    transition: 120ms transform ease-in-out;
-    background-color: CanvasText;
-}
-
-.radioBtn:checked::before {
-    transform: scale(1);
-}
 label {
     margin-left: 14px;
     font-size: 1.1rem;
@@ -47,6 +46,12 @@ label {
     margin-bottom: 15px;
 }
 .searchInput {
-    padding: 5px 10px;
-    border-radius: 5px;
+    width: 44vw;
+    margin-top: 12px;
+    margin-left: 2px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    &::placeholder {
+        font-size: 0.9rem;
+    }
 }
