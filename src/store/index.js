@@ -1,11 +1,11 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { filmApi } from './filmApi/reducer';
+import { chuckApi } from './chuckApi/reducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  combineReducers({ filmApi }),
+  combineReducers({ chuckApi }),
   composeEnhancers(applyMiddleware(thunk)),
 );
 

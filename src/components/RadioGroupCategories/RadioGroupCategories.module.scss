@@ -1,12 +1,15 @@
 .categoriesBlock {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 12px;
     margin-bottom: 5px;
     margin-left: 5px;
+    width: 100%;
 }
 
 .categoriesBtn {
     margin-right: 13px;
+    margin-bottom: 13px;
     padding: 5px 10px;
     font-weight: bold;
     font-size: 0.65rem;
@@ -23,4 +26,9 @@
         color: rgb(44, 44, 44);
         background-color: whitesmoke;
     }
+}
+
+.active{
+    color: rgb(44, 44, 44);
+    background-color: whitesmoke;
 }
