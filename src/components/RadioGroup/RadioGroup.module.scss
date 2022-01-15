@@ -1,0 +1,52 @@
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+.radioGroupItem {
+    align-items: center;
+    display: flex;
+    margin-bottom: 9px;
+}
+.radioBtn {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--form-background);
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    border: 0.15em solid black;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+}
+
+.radioBtn::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    background-color: CanvasText;
+}
+
+.radioBtn:checked::before {
+    transform: scale(1);
+}
+label {
+    margin-left: 14px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.categoriesBlock {
+    margin-bottom: 15px;
+}
+.searchInput {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
