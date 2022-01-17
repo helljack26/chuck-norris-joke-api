@@ -1,6 +1,28 @@
 main {
+    box-sizing: border-box;
     padding-top: 20px;
     padding-left: 9.5vw;
+    padding-right: 10px;
+    padding-bottom: 40px;
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
+        background: linear-gradient(180deg, #9292928f, #042b3875);
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
+        background: linear-gradient(180deg, #92929293, #042b38a9);
+    }
 }
 
 .logo {

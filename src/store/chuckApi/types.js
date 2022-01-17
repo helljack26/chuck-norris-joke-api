@@ -30,25 +30,27 @@ export const getCategoriesFromApi = () => async (dispatch) => {
         })
 }
 export const getJokeListFromApi = () => async (dispatch, getState) => {
-    // const state = getState();
-    // const searchFilm = state.filmApi.searchFilm;
-    // const filmList = state.filmApi.filmList;
-
+    localStorage.clear()
+    const state = getState();
+    const searchCategory = state.chuckApi.searchCategory;
+    const searchJoke = state.chuckApi.searchJoke;
     const urlArray = {
-        random: 'https://api.chucknorris.io/jokes/random'
-        // search: `https://api.themoviedb.org/3/search/movie?api_key=4d0c68776909a3f926088d7ddf14c097&query=${searchFilm}`
+        random: 'https://api.chucknorris.io/jokes/random',
+        category: `https://api.chucknorris.io/jokes/random?category=${searchCategory}`,
+        query: `https://api.chucknorris.io/jokes/search?query=${searchJoke}`
     }
-    // let url
-    // if (!searchFilm) {
-    //     url = urlArray.random
-    // } else {
-    //     url = urlArray.search
-    // }
-    await fetch(urlArray.random)
+    let url
+    if (!searchCategory && !searchJoke) {
+        url = urlArray.random
+    } else if (searchJoke && !searchCategory) {
+        url = urlArray.query
+    } else {
+        url = urlArray.category
+    }
+    await fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            const modifiedData = !data.errors ? checkInFavoriteList(data, dispatch) : null;
+            const modifiedData = checkInFavoriteList(data, dispatch);
             return (dispatch(setJokeFromApi(modifiedData))
                 // ,
                 // modifiedData.length === 0 ? (dispatch(updatePageTitle(`Nothing was found for "${searchFilm}"`)),
@@ -59,9 +61,15 @@ export const getJokeListFromApi = () => async (dispatch, getState) => {
 }
 
 export const checkInFavoriteList = (results, dispatch) => {
-
-    // Save necessary film fields
-    const modifiedData = results.map((item) => {
+    let modifiedArray = []
+    if (results.result !== undefined) {
+        results.result.map((item) => {
+            return modifiedArray.push(item)
+        })
+    } else {
+        modifiedArray.push(results)
+    }
+    const modifiedData = modifiedArray.map((item) => {
         const { categories, icon_url, id, updated_at, url, value } = item;
         const modifiedDataItem = {
             categories: !categories ? '' : categories,
@@ -94,26 +102,25 @@ export const checkInFavoriteList = (results, dispatch) => {
         default:
             return modifiedData
     }
-
-
 }
-export const toWatchList = (title, image, genre, id) => async (dispatch, getState) => {
+export const toFavoriteList = (categories, icon_url, id, updated_at, url, value) => async (dispatch, getState) => {
     const state = getState();
-    const watchList = state.filmApi.watchList;
-
+    const favoriteJokeList = state.chuckApi.favoriteJokeList;
     let actionType
-    if (title === undefined && image === undefined && genre === undefined) {
+    if (value === undefined && id !== undefined) {
         actionType = 'remove'
     } else {
         actionType = 'add'
-        const newInWatchItem = {
-            name: title,
-            poster_path: image,
-            genre_ids: genre,
+        const newInFavoriteItem = {
+            categories: categories,
+            icon_url: icon_url,
             id: id,
-            inWatch: true
+            updated_at: updated_at,
+            url: url,
+            value: value,
+            inFavorite: true
         }
-        watchList.push(newInWatchItem)
+        favoriteJokeList.push(newInFavoriteItem)
     }
     function getUniqueListBy(arr, key) {
         return [...new Map(arr.map(item => [item[key], item])).values()]
@@ -123,8 +130,8 @@ export const toWatchList = (title, image, genre, id) => async (dispatch, getStat
             return item.id !== key;
         });
     }
-    const cleanWatchList = actionType !== 'add' ? deleteUniqueFromList(watchList, id) : getUniqueListBy(watchList, 'id');
-    localStorage.setItem('watchList', JSON.stringify(cleanWatchList))
-    return dispatch(setFavoriteJokeList(cleanWatchList))
+    const cleanFavoriteList = actionType !== 'add' ? deleteUniqueFromList(favoriteJokeList, id) : getUniqueListBy(favoriteJokeList, 'id');
+    localStorage.setItem('favoriteList', JSON.stringify(cleanFavoriteList))
+    return dispatch(setFavoriteJokeList(cleanFavoriteList))
 }
 
