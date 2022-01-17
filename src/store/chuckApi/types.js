@@ -50,15 +50,19 @@ export const getJokeListFromApi = () => async (dispatch, getState) => {
     await fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            const modifiedData = checkInFavoriteList(data, dispatch);
-            return (dispatch(setJokeFromApi(modifiedData))
-                // ,
-                // modifiedData.length === 0 ? (dispatch(updatePageTitle(`Nothing was found for "${searchFilm}"`)),
-                //     dispatch(setJokeFromApi(filmList)))
-                //     : null
-            )
+            console.log(data);
+            // let modifiedData
+            if (!!data.total === false && !!data.id !== true) {
+                return
+            } else if (!!data.error === true) {
+                return
+            } else {
+                const modifiedData = checkInFavoriteList(data, dispatch);
+                return dispatch(setJokeFromApi(modifiedData))
+            }
         })
 }
+
 
 export const checkInFavoriteList = (results, dispatch) => {
     let modifiedArray = []
@@ -106,6 +110,7 @@ export const checkInFavoriteList = (results, dispatch) => {
 export const toFavoriteList = (categories, icon_url, id, updated_at, url, value) => async (dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
+    const jokeList = state.chuckApi.jokeList;
     let actionType
     if (value === undefined && id !== undefined) {
         actionType = 'remove'
@@ -131,6 +136,9 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value)
         });
     }
     const cleanFavoriteList = actionType !== 'add' ? deleteUniqueFromList(favoriteJokeList, id) : getUniqueListBy(favoriteJokeList, 'id');
+    const cleanJokeList = actionType === 'remove' ? deleteUniqueFromList(jokeList, id) : jokeList;
+    dispatch(setJokeFromApi(cleanJokeList))
+    console.log(cleanJokeList);
     localStorage.setItem('favoriteList', JSON.stringify(cleanFavoriteList))
     return dispatch(setFavoriteJokeList(cleanFavoriteList))
 }
