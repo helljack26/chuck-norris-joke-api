@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 body{
+    user-select: none;
     height: 100vh;
     overflow: hidden;
     margin: 0;

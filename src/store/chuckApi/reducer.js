@@ -24,7 +24,7 @@ export const chuckApi = (
         case UPDATE_CATEGORY_JOKE:
             return { ...state, searchCategory: action.payload };
         case SET_FAVORITE_JOKE_LIST:
-            return { ...state, favoriteJokeList: action.payload };
+            return { ...state, favoriteJokeList: action.payload.reverse() };
         default:
             return state;
     }
