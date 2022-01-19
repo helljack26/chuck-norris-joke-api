@@ -30,7 +30,7 @@ export const getCategoriesFromApi = () => async (dispatch) => {
         })
 }
 export const getJokeListFromApi = () => async (dispatch, getState) => {
-    localStorage.clear()
+    // localStorage.clear()
     const state = getState();
     const searchCategory = state.chuckApi.searchCategory;
     const searchJoke = state.chuckApi.searchJoke;
@@ -50,8 +50,6 @@ export const getJokeListFromApi = () => async (dispatch, getState) => {
     await fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            // let modifiedData
             if (!!data.total === false && !!data.id !== true) {
                 return
             } else if (!!data.error === true) {
@@ -62,7 +60,6 @@ export const getJokeListFromApi = () => async (dispatch, getState) => {
             }
         })
 }
-
 
 export const checkInFavoriteList = (results, dispatch) => {
     let modifiedArray = []
@@ -125,6 +122,7 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value)
             value: value,
             inFavorite: true
         }
+        console.log(favoriteJokeList);
         favoriteJokeList.push(newInFavoriteItem)
     }
     function getUniqueListBy(arr, key) {
@@ -137,8 +135,8 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value)
     }
     const cleanFavoriteList = actionType !== 'add' ? deleteUniqueFromList(favoriteJokeList, id) : getUniqueListBy(favoriteJokeList, 'id');
     const cleanJokeList = actionType === 'remove' ? deleteUniqueFromList(jokeList, id) : jokeList;
-    dispatch(setJokeFromApi(cleanJokeList))
     console.log(cleanJokeList);
+    dispatch(setJokeFromApi(cleanJokeList))
     localStorage.setItem('favoriteList', JSON.stringify(cleanFavoriteList))
     return dispatch(setFavoriteJokeList(cleanFavoriteList))
 }

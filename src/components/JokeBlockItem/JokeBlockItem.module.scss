@@ -2,11 +2,22 @@
     background-color: whitesmoke;
     display: flex;
     position: relative;
-    width: 47vw;
+    width: 100%;
     margin-top: 40px;
     padding: 60px 30px;
     padding-bottom: 40px;
     padding-right: 50px;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+.jokeBlockFavoriteItem {
+    background-color: white;
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    padding: 45px 20px;
+    padding-bottom: 20px;
     border-radius: 20px;
     box-sizing: border-box;
 }

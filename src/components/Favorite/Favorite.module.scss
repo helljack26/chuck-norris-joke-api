@@ -3,7 +3,7 @@
     width: 100%;
     height: 100vh;
     box-sizing: border-box;
-    padding: 35px 35px;
+    padding: 25px;
     overflow-y: scroll;
     &::-webkit-scrollbar {
         width: 8px;
@@ -26,5 +26,9 @@
         color: rgb(167, 167, 167);
         margin-bottom: 20px;
         user-select: none;
+    }
+
+    .favoriteBtn {
+        display: none;
     }
 }

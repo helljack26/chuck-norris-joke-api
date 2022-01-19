@@ -1,10 +1,21 @@
 import style from './Favorite.module.scss';
+import { useEffect } from 'react';
 import JokeBlockItem from '../JokeBlockItem';
 import { useDispatch, useSelector } from 'react-redux';
+import { setFavoriteJokeList } from '../../store/chuckApi/types';
 
 const Favorite = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList)
+    useEffect(() => {
+        const localStorageFavoriteList = window.localStorage.getItem('favoriteList')
+        const localStorageFavoriteListJson = JSON.parse(localStorageFavoriteList)
+        console.log(localStorageFavoriteListJson);
+        if (localStorageFavoriteListJson !== null) {
+            dispatch(setFavoriteJokeList(localStorageFavoriteListJson))
+        }
+    }, [dispatch])
+
     return (
         <>
             <aside className={style.favoriteBlock}>
@@ -15,12 +26,11 @@ const Favorite = () => {
                     <p className={style.favoriteHeader}>Favorite</p>
                 </div>
                 <div className={style.favoriteJokeBlock}>
-                    {favoriteJokeList.map((jokeData, key) => {
-                        console.log('data', jokeData);
+                    {favoriteJokeList ? favoriteJokeList.map((jokeData, key) => {
                         return (
-                            <JokeBlockItem jokeData={jokeData} key={key} />
+                            <JokeBlockItem jokeData={jokeData} key={key} favoriteBlockStyle={true} />
                         )
-                    })}
+                    }) : ''}
                 </div>
             </aside>
         </>
