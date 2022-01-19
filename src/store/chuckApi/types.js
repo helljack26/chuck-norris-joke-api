@@ -137,6 +137,6 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value)
     const cleanJokeList = actionType === 'remove' ? deleteUniqueFromList(jokeList, id) : jokeList;
     dispatch(setJokeFromApi(cleanJokeList))
     localStorage.setItem('favoriteList', JSON.stringify(cleanFavoriteList))
-    return dispatch(setFavoriteJokeList(cleanFavoriteList))
+    return (dispatch(setFavoriteJokeList(cleanFavoriteList)))
 }
 

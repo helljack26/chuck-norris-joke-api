@@ -7,12 +7,9 @@ import { setFavoriteJokeList } from '../../store/chuckApi/types';
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
-    // const reverse = favoriteJokeList.Reverse() 
-    console.log(favoriteJokeList);
     useEffect(() => {
         const localStorageFavoriteList = window.localStorage.getItem('favoriteList')
         const localStorageFavoriteListJson = JSON.parse(localStorageFavoriteList)
-        console.log(localStorageFavoriteListJson);
         if (localStorageFavoriteListJson !== null) {
             dispatch(setFavoriteJokeList(localStorageFavoriteListJson))
         }
