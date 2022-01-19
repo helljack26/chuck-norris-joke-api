@@ -1,14 +1,10 @@
 import style from './JokeBlockItem.module.scss'
 import AddToFavoriteButton from '../AddToFavoriteButton';
+import countLastUpdate from '../helpers/countLastUpdate';
+
 const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
     const { categories, icon_url, id, updated_at, url, value, inFavorite } = jokeData;
-    const countLastUpdate = (date) => {
-        const lastUpdate = new Date(`${date.slice(0, 10).replace('-', '/').replace('-', '/')}`);
-        const now = new Date();
-        const difference = lastUpdate.getTime() - now.getTime();
-        const days = Math.abs(difference / (1000 * 3600 * 24));
-        return Math.ceil(days);
-    }
+
     return (
         <div className={favoriteBlockStyle === undefined ? style.jokeBlockItem : style.jokeBlockFavoriteItem}>
             <div className={style.icon}>

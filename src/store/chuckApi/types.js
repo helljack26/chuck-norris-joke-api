@@ -105,6 +105,8 @@ export const checkInFavoriteList = (results, dispatch) => {
             return modifiedData
     }
 }
+
+
 export const toFavoriteList = (categories, icon_url, id, updated_at, url, value) => async (dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;

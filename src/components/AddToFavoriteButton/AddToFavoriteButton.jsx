@@ -16,10 +16,8 @@ const buttonType = {
     }
 }
 const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavorite, value, favoriteBlockStyle }) => {
-
     const dispatch = useDispatch();
     const [type, setType] = useState()
-
 
     switch (inFavorite ? inFavorite : type) {
         case true:
@@ -30,14 +28,13 @@ const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavo
                         onClick={() => {
                             return (dispatch(toFavoriteList(undefined, undefined, id, undefined, undefined, undefined)),
                                 setType(false))
-
                         }} />
                 </button>
             )
         default:
             return <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
                 <img src={buttonType.notInFavorite.url} alt="Add to Favorite list"
-                    className={style.addIcon} onClick={() => {
+                    className={style.notInFavorite} onClick={() => {
                         return (dispatch(toFavoriteList(categories, icon_url, id, updated_at, url, value)),
                             setType(true))
                     }}

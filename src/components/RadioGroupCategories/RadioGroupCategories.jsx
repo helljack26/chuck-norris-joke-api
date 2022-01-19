@@ -12,19 +12,17 @@ const RadioGroupCategories = () => {
     const categoriesList = useSelector(state => state.chuckApi.categoriesList)
     const searchCategory = useSelector(state => state.chuckApi.searchCategory)
     return (
-        <>
-            <div className={style.categoriesBlock}>
-                {categoriesList.map((category, key) => {
-                    return (
-                        <button type='button'
-                            key={key}
-                            className={`${style.categoriesBtn} ${searchCategory === category ? style.active : null}`}
-                            onClick={() => dispatch(updateCategoryJoke(category))}
-                        >{category}</button>
-                    );
-                })}
-            </div>
-        </>
+        <div className={style.categoriesBlock}>
+            {categoriesList.map((category, key) => {
+                return (
+                    <button type='button'
+                        key={key}
+                        className={`${style.categoriesBtn} ${searchCategory === category ? style.active : null}`}
+                        onClick={() => dispatch(updateCategoryJoke(category))}
+                    >{category}</button>
+                );
+            })}
+        </div>
     )
 }
 
