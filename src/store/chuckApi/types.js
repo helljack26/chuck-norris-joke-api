@@ -144,6 +144,7 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value,
         }
     }
 
+
     localStorage.setItem('favoriteList', JSON.stringify(favoriteJokeList))
     dispatch(setJokeFromApi([]))
     dispatch(setJokeFromApi(jokeList))
