@@ -122,7 +122,6 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value,
         } else {
             return
         }
-
     } else {
         if (checkFavoriteList === true && checkJokeList === true) {
             favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
@@ -150,7 +149,6 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value,
     dispatch(setJokeFromApi(jokeList))
     dispatch(setFavoriteJokeList([]))
     dispatch(setFavoriteJokeList(favoriteJokeList))
-    // console.log(favoriteJokeList, jokeList);
     return
 }
 

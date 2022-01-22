@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import style from './AddToFavoriteButton.module.scss'
 import { toFavoriteList } from '../../store/chuckApi/types';
-import { useEffect } from 'react';
 
 const buttonType = {
     inFavorite: {
@@ -16,22 +15,28 @@ const buttonType = {
         class: 'notInFavorite'
     }
 }
-const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavorite, value, favoriteBlockStyle }) => {
+const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavorite = undefined, value, favoriteBlockStyle }) => {
     const dispatch = useDispatch();
     const [type, setType] = useState()
-
-    switch (inFavorite ? inFavorite : type) {
+    useEffect(() => {
+        if (inFavorite === undefined) {
+            return
+        } else {
+            setType(inFavorite)
+        }
+    }, [setType, inFavorite])
+    switch (type) {
         case true:
-            return (
-                <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
-                    <img src={buttonType.inFavorite.url} alt='In favorite button'
-                        className={style.inFavorite}
-                        onClick={() => {
-                            return (dispatch(toFavoriteList(categories, icon_url, id, updated_at, url, value, true)),
-                                setType(false))
-                        }} />
-                </button>
-            )
+
+            return <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
+                <img src={buttonType.inFavorite.url} alt='In favorite button'
+                    className={style.inFavorite}
+                    onClick={() => {
+                        return (dispatch(toFavoriteList(categories, icon_url, id, updated_at, url, value, true)),
+                            setType(false))
+                    }} />
+            </button>
+
         default:
             return <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
                 <img src={buttonType.notInFavorite.url} alt="Add to Favorite list"
