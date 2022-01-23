@@ -2,6 +2,7 @@ export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';
 export const SET_JOKE_LIST = 'SET_JOKE_LIST';
 export const UPDATE_SEARCH_JOKE = 'UPDATE_SEARCH_JOKE';
 export const UPDATE_CATEGORY_JOKE = 'UPDATE_CATEGORY_JOKE';
+export const SET_FAVORITE_LIST_STATE = 'SET_FAVORITE_LIST_STATE';
 export const SET_FAVORITE_JOKE_LIST = 'SET_FAVORITE_JOKE_LIST';
 
 export const setCategoriesFromApi = (payload) => {
@@ -15,6 +16,9 @@ export const updateSearchJoke = (payload) => {
 }
 export const updateCategoryJoke = (payload) => {
     return { type: UPDATE_CATEGORY_JOKE, payload }
+}
+export const setFavoriteListState = (payload) => {
+    return { type: SET_FAVORITE_LIST_STATE, payload }
 }
 export const setFavoriteJokeList = (payload) => {
     return { type: SET_FAVORITE_JOKE_LIST, payload }
@@ -143,7 +147,6 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value,
             favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
         }
     }
-
 
     localStorage.setItem('favoriteList', JSON.stringify(favoriteJokeList))
     dispatch(setJokeFromApi([]))

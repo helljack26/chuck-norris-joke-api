@@ -7,29 +7,29 @@ main {
     height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    position: relative;
+}
+main::-webkit-scrollbar {
+    width: 4px;
+}
 
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
+main::-webkit-scrollbar-track {
+    background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
+    background: linear-gradient(180deg, #9292928f, #042b3875);
+    border-radius: 5px;
+}
 
-    &::-webkit-scrollbar-track {
-        background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
-        background: linear-gradient(180deg, #9292928f, #042b3875);
-        border-radius: 5px;
-    }
+main::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
+    background: linear-gradient(180deg, #92929293, #042b38a9);
+}
 
-    &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
-        background: linear-gradient(180deg, #92929293, #042b38a9);
-    }
-
-    .mainHeader {
-        display: flex;
-    }
-    .mainHeader > div > h1 {
-        margin-top: 15px;
-    }
+.mainHeader {
+    display: flex;
+}
+.mainHeader > div > h1 {
+    margin-top: 15px;
 }
 
 .logo {
@@ -44,18 +44,18 @@ main {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -moz-osx-font-smoothing: grayscale;
-    &:hover,
-    &:focus,
-    &:active {
-        -webkit-animation-name: hvr-buzz-out;
-        animation-name: hvr-buzz-out;
-        -webkit-animation-duration: 0.75s;
-        animation-duration: 0.75s;
-        -webkit-animation-timing-function: linear;
-        animation-timing-function: linear;
-        -webkit-animation-iteration-count: 1;
-        animation-iteration-count: 1;
-    }
+}
+.logo:hover,
+.logo:focus,
+.logo:active {
+    -webkit-animation-name: hvr-buzz-out;
+    animation-name: hvr-buzz-out;
+    -webkit-animation-duration: 0.75s;
+    animation-duration: 0.75s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
 }
 
 .description {
@@ -75,10 +75,29 @@ main {
     padding: 12px 40px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    &:hover {
-        background-color: #4a64c4;
+}
+.radioGroupBtn:hover {
+    background-color: #4a64c4;
+}
+
+
+@media (max-width: 836px) {
+    main {
+        padding-left: 4.7vw;
+        padding-right: 5vw;
+        height: 100%;
+        overflow-y: hidden;
+    }
+    .mainHeader {
+        flex-direction: column;
     }
 }
+
+
+
+
+
+
 
 @-webkit-keyframes hvr-buzz-out {
     10% {

@@ -1,4 +1,4 @@
-import style from './Main.module.scss'
+import style from './Main.module.css'
 import RadioGroup from '../RadioGroup';
 import JokeBlockItem from '../JokeBlockItem';
 import { useDispatch, useSelector } from 'react-redux';

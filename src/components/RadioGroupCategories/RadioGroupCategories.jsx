@@ -17,7 +17,7 @@ const RadioGroupCategories = () => {
                 return (
                     <button type='button'
                         key={key}
-                        className={`${style.categoriesBtn} ${searchCategory === category ? style.active : null}`}
+                        className={`${style.categoriesBtn} ${key === 0 ? style.active : null} ${searchCategory === category ? style.active : null}`}
                         onClick={() => dispatch(updateCategoryJoke(category))}
                     >{category}</button>
                 );

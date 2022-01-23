@@ -1,12 +1,13 @@
 import style from './RadioGroup.module.scss'
 import './RadioGroup.module.scss'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateCategoryJoke, updateSearchJoke } from '../../store/chuckApi/types';
 import RadioGroupCategories from '../RadioGroupCategories';
 import handleKeyPress from '../helpers/handleKeyPress'
 
 const RadioGroup = () => {
+    const categoriesList = useSelector(state => state.chuckApi.categoriesList)
     const dispatch = useDispatch();
     const [openCategories, setOpenCategories] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
@@ -31,7 +32,8 @@ const RadioGroup = () => {
                     name="contact" value="fromCategories" onClick={() => {
                         return (setOpenCategories(true),
                             setOpenSearch(false),
-                            dispatch(updateSearchJoke('')))
+                            dispatch(updateSearchJoke('')),
+                            dispatch(updateCategoryJoke(categoriesList[0])))
                     }} />
                 <label htmlFor="fromCategories">From categories</label>
             </div>
