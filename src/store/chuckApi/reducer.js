@@ -13,7 +13,7 @@ export const chuckApi = (
         jokeList: [],
         searchJoke: '',
         searchCategory: '',
-        favoriteListStateBtn: ['desktop', true],
+        favoriteListStateBtn: false,
         favoriteJokeList: []
     }, action,) => {
     switch (action.type) {

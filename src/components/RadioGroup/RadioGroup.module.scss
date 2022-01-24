@@ -46,6 +46,7 @@ label {
     margin-bottom: 15px;
 }
 .searchInput {
+    min-width: 300px;
     width: 44vw;
     margin-top: 12px;
     margin-left: 2px;
@@ -56,9 +57,9 @@ label {
     }
 }
 
-.displayNone{
+.displayNone {
     display: none;
 }
-.displayBlock{
+.displayBlock {
     display: block;
 }
