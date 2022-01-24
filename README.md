@@ -1,6 +1,6 @@
   ## Jokes about Chuck Norris from [Chuck Norris DB](https://api.chucknorris.io/)
   
- Display jokes with using API [The Movie DB](https://api.chucknorris.io/).  
+ Display jokes with using API [Chuck Norris](https://api.chucknorris.io/).  
 
  Manage your favoritelist(`localstorage`).  
  
