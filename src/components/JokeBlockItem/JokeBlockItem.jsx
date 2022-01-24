@@ -10,10 +10,8 @@ const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
             <div className={style.icon}>
                 <img src={icon_url} alt="Joke icon" />
             </div>
-            <AddToFavoriteButton categories={categories} icon_url={icon_url} id={id}
-                updated_at={updated_at} url={url} value={value} inFavorite={inFavorite}
-                favoriteBlockStyle={favoriteBlockStyle}
-            />
+            <AddToFavoriteButton categories={categories} icon_url={icon_url} id={id} updated_at={updated_at} url={url}
+                value={value} inFavorite={inFavorite} favoriteBlockStyle={favoriteBlockStyle} />
             <div className={style.data}>
                 <div className={style.idBlock}>
                     <p className={style.id}>ID:</p>
@@ -24,7 +22,8 @@ const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
                 <p className={style.text}>{value}</p>
                 <div className={style.jokeFooter}>
                     {updated_at !== undefined ? <p className={style.lastUpdate}>Last update: {countLastUpdate(updated_at)} days ago.</p> : null}
-                    {categories ? categories.length !== 0 && categories.length !== undefined ? <p className={style.categories}>{categories}</p> : null : null}
+                    {categories ? categories.length !== 0 && categories.length !== undefined ? <p className={style.categories}>
+                        {categories}</p> : null : null}
                 </div>
             </div>
         </div>
@@ -32,4 +31,3 @@ const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
 }
 
 export default JokeBlockItem;
-

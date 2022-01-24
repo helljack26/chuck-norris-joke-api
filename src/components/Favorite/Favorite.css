@@ -7,6 +7,7 @@
     overflow-y: scroll;
     display: block;
 }
+
 .favoriteBlockDesktop::-webkit-scrollbar {
     width: 6px;
 }
@@ -22,14 +23,17 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
     background: linear-gradient(180deg, #929292, #042b38);
 }
-.favoriteTablet{
+
+.favoriteTablet {
     display: none;
 }
+
 @media (max-width: 836px) {
     .favoriteBlockDesktop {
         display: none;
     }
-    .favoriteTablet{
+
+    .favoriteTablet {
         box-sizing: border-box;
         width: 100vw;
         height: 100vh;
@@ -42,7 +46,8 @@
         z-index: 990;
         background-color: rgba(0, 0, 0, 0.37);
     }
-    .favoriteTabletBlock{
+
+    .favoriteTabletBlock {
         padding: 0px 40px;
         padding-top: 80px;
         padding-bottom: 40px;
@@ -51,26 +56,28 @@
         height: fit-content;
         background-color: whitesmoke;
     }
+
     .favoriteTablet::-webkit-scrollbar {
         width: 8px;
     }
-    
+
     .favoriteTablet::-webkit-scrollbar-track {
         background: -webkit-gradient(linear, left top, left bottom, from(#1e3942), to(#e2e2e2));
         background: linear-gradient(180deg, #042b38, #929292);
         border-radius: 5px;
     }
-    
+
     .favoriteTablet::-webkit-scrollbar-thumb {
         border-radius: 10px;
         background: -webkit-gradient(linear, left top, left bottom, from(#d8d8d8), to(#1e3942));
         background: linear-gradient(180deg, #c5c5c5, #042b38);
     }
-   
-    .favoriteBlockClosed{
+
+    .favoriteBlockClosed {
         display: none;
     }
-    .favoriteAsideOpened{
+
+    .favoriteAsideOpened {
         display: block;
     }
 }

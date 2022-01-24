@@ -1,5 +1,4 @@
 import './FavoriteHeader.css'
-// import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setFavoriteListState } from '../../store/chuckApi/types';
 const FavoriteHeader = ({ type }) => {
@@ -15,8 +14,7 @@ const FavoriteHeader = ({ type }) => {
             )
         default:
             return (
-                <div className={`${'favoriteHeaderTablet'} ${favoriteListStateBtn === true ? 'favoriteHeaderTabletActive' : ''}`}
-                >
+                <div className={`${'favoriteHeaderTablet'} ${favoriteListStateBtn === true ? 'favoriteHeaderTabletActive' : ''}`} >
                     <button className='favoriteBtn'
                         onClick={() => {
                             return favoriteListStateBtn === false ?
@@ -31,7 +29,6 @@ const FavoriteHeader = ({ type }) => {
                 </div>
             )
     }
-
 }
 
 export default FavoriteHeader; 

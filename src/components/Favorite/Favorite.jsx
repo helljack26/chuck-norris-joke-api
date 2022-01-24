@@ -1,4 +1,3 @@
-// import style from './Favorite.module.css';
 import './Favorite.css';
 import { useEffect } from 'react';
 import FavoriteHeader from '../FavoriteHeader';
@@ -13,20 +12,15 @@ const Favorite = () => {
     const favoriteListStateBtn = useSelector(state => state.chuckApi.favoriteListStateBtn);
 
     useEffect(() => {
-        const localStorageFavoriteList = window.localStorage.getItem('favoriteList')
-        const localStorageFavoriteListJson = JSON.parse(localStorageFavoriteList)
-        if (localStorageFavoriteListJson !== null) {
-            let initial = false;
-            const cleanLocalStorageFavoriteList = initial === false ?
-                removeAllNotInFavoriteItem(localStorageFavoriteListJson, initial) :
-                localStorageFavoriteListJson;
-            dispatch(setFavoriteJokeList(cleanLocalStorageFavoriteList))
-        }
+        const cleanLocalStorageFavoriteList = removeAllNotInFavoriteItem()
+        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? removeAllNotInFavoriteItem() : [];
+        dispatch(setFavoriteJokeList(cleanFavoriteList))
     }, [dispatch])
+    
     return (
         <>
             <FavoriteHeader type={'tablet'} />
-            {/* Desktop */}
+
             <aside className='favoriteBlockDesktop'>
                 <FavoriteHeader type={'desktop'} />
                 <div className='favoriteJokeBlock'>
@@ -37,7 +31,7 @@ const Favorite = () => {
                     }) : ''}
                 </div>
             </aside>
-            {/* Tablet */}
+
             <aside className={`${'favoriteTablet'} ${favoriteListStateBtn === false ? 'favoriteBlockClosed' : 'favoriteBlockOpened'}`} >
                 <div className={'favoriteTabletBlock'}>
                     {favoriteJokeList ? favoriteJokeList.map((jokeData, key) => {

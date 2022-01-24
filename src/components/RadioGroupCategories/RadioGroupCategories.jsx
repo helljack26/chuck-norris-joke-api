@@ -5,19 +5,27 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const RadioGroupCategories = () => {
     const dispatch = useDispatch();
+    const categoriesList = useSelector(state => state.chuckApi.categoriesList)
+    const searchCategory = useSelector(state => state.chuckApi.searchCategory)
+
     useEffect(() => {
         dispatch(getCategoriesFromApi())
     }, [dispatch])
 
-    const categoriesList = useSelector(state => state.chuckApi.categoriesList)
-    const searchCategory = useSelector(state => state.chuckApi.searchCategory)
+    let initial = false
+    if (initial === false) {
+        initial = true;
+        updateCategoryJoke(categoriesList[0])
+    }
+
     return (
         <div className={style.categoriesBlock}>
             {categoriesList.map((category, key) => {
                 return (
                     <button type='button'
                         key={key}
-                        className={`${style.categoriesBtn} ${key === 0 ? style.active : null} ${searchCategory === category ? style.active : null}`}
+                        className={`${style.categoriesBtn}  
+                        ${searchCategory === category ? style.active : null}`}
                         onClick={() => dispatch(updateCategoryJoke(category))}
                     >{category}</button>
                 );
