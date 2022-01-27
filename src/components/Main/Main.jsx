@@ -22,7 +22,7 @@ const Main = () => {
                     dispatch(getJokeListFromApi())
                 }} >Get a joke</button>
             <div className={style.jokesBlock}>
-                {jokeList !== [] ? jokeList.map((jokeData, key) => {
+                {!!jokeList.length ? jokeList.map((jokeData, key) => {
                     return (
                         <JokeBlockItem jokeData={jokeData} key={key} />
                     )

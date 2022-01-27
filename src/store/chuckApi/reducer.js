@@ -6,16 +6,16 @@ import {
     SET_FAVORITE_LIST_STATE,
     SET_FAVORITE_JOKE_LIST
 } from './types';
-
-export const chuckApi = (
-    state = {
+const initialState = {
         categoriesList: [],
         jokeList: [],
         searchJoke: '',
         searchCategory: '',
         favoriteListStateBtn: false,
         favoriteJokeList: []
-    }, action,) => {
+    }
+export const chuckApi = (
+    state = initialState, action,) => {
     switch (action.type) {
         case SET_CATEGORIES_LIST:
             return { ...state, categoriesList: action.payload };
@@ -29,6 +29,9 @@ export const chuckApi = (
             return { ...state, favoriteListStateBtn: action.payload };
         case SET_FAVORITE_JOKE_LIST:
             return { ...state, favoriteJokeList: action.payload };
+        // case RESET: {
+        //return {...state, favoritesList: [], joke: payload.joke, }
+        //}
         default:
             return state;
     }

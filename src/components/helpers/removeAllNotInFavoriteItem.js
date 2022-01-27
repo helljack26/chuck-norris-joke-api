@@ -1,3 +1,5 @@
+const isFavorite = item => !!item.inFavorite
+
 const removeAllNotInFavoriteItem = () => {
     let initial = false;
     const localStorageFavoriteList = window.localStorage.getItem('favoriteList')
@@ -5,13 +7,10 @@ const removeAllNotInFavoriteItem = () => {
 
     if (localStorageFavoriteListJson !== null && !initial ) {
             initial = true;
-            const cleanLocalStorageFavoriteList = localStorageFavoriteListJson.filter((item) => {
-                return item.inFavorite === true;
-            });
+        const cleanLocalStorageFavoriteList = localStorageFavoriteListJson.filter(isFavorite); 
             return cleanLocalStorageFavoriteList
-    }else{
-        return undefined
     }
+    
 };
 
 export default removeAllNotInFavoriteItem

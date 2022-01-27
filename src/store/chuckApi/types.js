@@ -1,3 +1,5 @@
+//actions.js
+import {baseUrl} from '../../config'
 export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';
 export const SET_JOKE_LIST = 'SET_JOKE_LIST';
 export const UPDATE_SEARCH_JOKE = 'UPDATE_SEARCH_JOKE';
@@ -24,9 +26,10 @@ export const setFavoriteJokeList = (payload) => {
     return { type: SET_FAVORITE_JOKE_LIST, payload }
 }
 
-export const getCategoriesFromApi = () => async (dispatch) => {
+// function with async always return promise
+export const getCategoriesFromApi = () =>  (dispatch) => {
     const urlCategories = 'https://api.chucknorris.io/jokes/categories'
-    await fetch(urlCategories)
+     fetch(urlCategories)
         .then((response) => response.json())
         .then((data) => {
             return (dispatch(setCategoriesFromApi(data))
@@ -34,24 +37,31 @@ export const getCategoriesFromApi = () => async (dispatch) => {
         })
 }
 
-export const getJokeListFromApi = () => async (dispatch, getState) => {
+export const getJokeListFromApi = () => (dispatch, getState) => {
+    //const res = await fetch()
+    // const data = res.json()
+
     const state = getState();
     const searchCategory = state.chuckApi.searchCategory;
     const searchJoke = state.chuckApi.searchJoke;
+
+    //move to config or above function
     const url = {
-        random: 'https://api.chucknorris.io/jokes/random',
+        random:`${baseUrl}/random`,
         category: `https://api.chucknorris.io/jokes/random?category=${searchCategory}`,
         query: `https://api.chucknorris.io/jokes/search?query=${searchJoke}`
     }
-    let queryUrl
-    if (!searchCategory && !searchJoke) {
+    const isRandom = !searchCategory && !searchJoke;
+
+    let queryUrl;
+    if (isRandom) {
         queryUrl = url.random
     } else if (searchJoke && !searchCategory) {
         queryUrl = url.query
     } else {
         queryUrl = url.category
     }
-    await fetch(queryUrl)
+      fetch(queryUrl)
         .then((response) => response.json())
         .then((data) => {
             if (!!data.total === false && !!data.id !== true) {
@@ -132,6 +142,7 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value,
             jokeList.find(joke => joke.id === id).inFavorite = true;
         } else {
             if (checkJokeList === true) {
+                
                 jokeList.find(joke => joke.id === id).inFavorite = true;
                 const newInFavoriteItem = {
                     categories: categories,
@@ -149,6 +160,8 @@ export const toFavoriteList = (categories, icon_url, id, updated_at, url, value,
     }
 
     localStorage.setItem('favoriteList', JSON.stringify(favoriteJokeList))
+    // dispatch(reset({joke, jokeList}))
+    // move to one action
     dispatch(setJokeFromApi([]))
     dispatch(setJokeFromApi(jokeList))
     dispatch(setFavoriteJokeList([]))
