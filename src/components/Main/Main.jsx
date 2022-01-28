@@ -6,30 +6,32 @@ import { getJokeListFromApi } from '../../store/chuckApi/types';
 
 const Main = () => {
     const dispatch = useDispatch();
-    const jokeList = useSelector(state => state.chuckApi.jokeList)
-    return (
-        <main>
-            <div className={style.mainHeader}>
-                <img src="./img/icon/chucknorris_logo.png" alt="Logo" className={style.logo} />
-                <div>
-                    <h1>Hey!</h1>
-                    <p className={style.description}>Let's try to find a joke for you:</p>
-                </div>
+    const jokeList = useSelector(state => state.chuckApi.jokeList);
+    // const searchJoke = useSelector(state => state.chuckApi.searchJoke);
+    const isJokeList = Boolean(jokeList);
+    // const isSearchMin = Boolean(searchJoke.length < 3)
+
+    return <main>
+        <div className={style.mainHeader}>
+            <img src="./img/icon/chucknorris_logo.png" alt="Logo" className={style.logo} />
+            <div>
+                <h1>Hey!</h1>
+                <p className={style.description}>Let's try to find a joke for you:</p>
             </div>
-            <RadioGroup />
-            <button type='button' className={style.radioGroupBtn}
-                onClick={() => {
-                    dispatch(getJokeListFromApi())
-                }} >Get a joke</button>
-            <div className={style.jokesBlock}>
-                {jokeList !== [] ? jokeList.map((jokeData, key) => {
-                    return (
-                        <JokeBlockItem jokeData={jokeData} key={key} />
-                    )
-                }) : ''}
-            </div>
-        </main>
-    )
+        </div>
+        <RadioGroup />
+        <button type='button' className={style.radioGroupBtn}
+            onClick={() => dispatch(getJokeListFromApi())}
+        >Get a joke</button>
+        <div className={style.jokesBlock}>
+            {isJokeList ? jokeList.map((jokeData, key) => {
+                return (
+                    <JokeBlockItem jokeData={jokeData} key={key} />
+                )
+            }) : ''}
+        </div>
+    </main>
+
 }
 
 export default Main;

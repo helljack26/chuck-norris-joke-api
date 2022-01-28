@@ -11,19 +11,7 @@ main {
 }
 
 main::-webkit-scrollbar {
-    width: 4px;
-}
-
-main::-webkit-scrollbar-track {
-    background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
-    background: linear-gradient(180deg, #9292928f, #042b3875);
-    border-radius: 5px;
-}
-
-main::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#929292), to(#1e3942));
-    background: linear-gradient(180deg, #92929293, #042b38a9);
+    width: 0px;
 }
 
 .mainHeader {
