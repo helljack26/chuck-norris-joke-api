@@ -2,22 +2,31 @@ import './Favorite.css';
 import { useEffect } from 'react';
 import FavoriteHeader from '../FavoriteHeader';
 import JokeBlockItem from '../JokeBlockItem';
-import removeAllNotInFavoriteItem from '../helpers/removeAllNotInFavoriteItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFavoriteJokeList } from '../../store/chuckApi/types';
+
+const initialSetOnlyInFavoriteItem = () => {
+    let initial = false;
+    const localStorageFavoriteListJson = JSON.parse(window.localStorage.getItem('favoriteList'))
+
+    return localStorageFavoriteListJson !== null && !initial ? (
+        initial = true,
+        localStorageFavoriteListJson.filter((item) => item.inFavorite === true))
+        : null
+};
 
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
     const favoriteListStateBtn = useSelector(state => state.chuckApi.favoriteListStateBtn);
+    const isFavoriteList = Boolean(favoriteJokeList.length)
 
     useEffect(() => {
-        const cleanLocalStorageFavoriteList = removeAllNotInFavoriteItem()
-        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? removeAllNotInFavoriteItem() : [];
-        dispatch(setFavoriteJokeList(cleanFavoriteList))
+        const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
+        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? initialSetOnlyInFavoriteItem() : []; dispatch(setFavoriteJokeList(cleanFavoriteList))
     }, [dispatch])
-    
-    return (
+
+    return (isFavoriteList === true ?
         <>
             <FavoriteHeader type={'tablet'} />
 
@@ -42,6 +51,8 @@ const Favorite = () => {
                 </div>
             </aside>
         </>
+        : null
+
     )
 }
 

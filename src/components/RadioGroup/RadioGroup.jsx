@@ -4,8 +4,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateCategoryJoke, updateSearchJoke } from '../../store/chuckApi/types';
 import RadioGroupCategories from '../RadioGroupCategories';
-import handleKeyPress from '../helpers/handleKeyPress'
 
+const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && event.target.value !== '') {
+        event.preventDefault();
+    }
+}
 const RadioGroup = () => {
     const categoriesList = useSelector(state => state.chuckApi.categoriesList)
     const dispatch = useDispatch();
