@@ -78,16 +78,15 @@ export const checkInFavoriteList = (results, dispatch, getState) => {
         }
         return modifiedDataItem
     })
-    const checkInFavoriteList = (item) => {
-        const jokesFavoriteList = favoriteJokeList.find(jokes => jokes.id === item.id)
-        return Boolean(jokesFavoriteList) === true ? jokesFavoriteList : item;
+    const checkInStateFavoriteList = (item) => {
+        const foundJoke = favoriteJokeList.find(jokes => jokes.id === item.id)
+        return Boolean(foundJoke) === true ? foundJoke : item;
     }
     const isFavoriteJokeList = Boolean(favoriteJokeList === null)
     return isFavoriteJokeList ? modifiedData :
         (dispatch(setFavoriteJokeList(favoriteJokeList)),
-            modifiedData.map((item) => checkInFavoriteList(item)))
+            modifiedData.map((item) => checkInStateFavoriteList(item)))
 }
-
 
 export const toFavoriteList = (categories, icon_url, id, updated_at, url, value, remove) => (dispatch, getState) => {
     const state = getState();
