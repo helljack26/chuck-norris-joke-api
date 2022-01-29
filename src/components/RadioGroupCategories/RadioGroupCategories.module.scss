@@ -1,0 +1,35 @@
+.categoriesBlock {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    width: 100%;
+}
+
+.categoriesBtn {
+    margin-right: 13px;
+    margin-bottom: 13px;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 0.65rem;
+    color: rgb(175, 175, 175);
+    letter-spacing: 2px;
+    background-color: white;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 7px 1px rgba(79, 79, 79, 0.2);
+    -moz-box-shadow: 0px 0px 7px 1px rgba(79, 79, 79, 0.2);
+    box-shadow: 0px 0px 7px 1px rgba(79, 79, 79, 0.2);
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        color: rgb(44, 44, 44);
+        background-color: whitesmoke;
+    }
+}
+
+.active {
+    color: rgb(44, 44, 44);
+    background-color: whitesmoke;
+}
