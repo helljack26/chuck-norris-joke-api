@@ -1,7 +1,7 @@
 import {
     SET_CATEGORIES_LIST,
     SET_JOKE_LIST,
-    UPDATE_SEARCH_JOKE,
+    UPDATE_SEARCH_BY_INPUT,
     UPDATE_CATEGORY_JOKE,
     SET_FAVORITE_LIST_STATE,
     SET_FAVORITE_JOKE_LIST
@@ -11,7 +11,7 @@ export const chuckApi = (
     state = {
         categoriesList: [],
         jokeList: [],
-        searchJoke: '',
+        searchByInput: '',
         searchCategory: '',
         favoriteListStateBtn: false,
         favoriteJokeList: []
@@ -21,8 +21,8 @@ export const chuckApi = (
             return { ...state, categoriesList: action.payload };
         case SET_JOKE_LIST:
             return { ...state, jokeList: action.payload };
-        case UPDATE_SEARCH_JOKE:
-            return { ...state, searchJoke: action.payload };
+        case UPDATE_SEARCH_BY_INPUT:
+            return { ...state, searchByInput: action.payload };
         case UPDATE_CATEGORY_JOKE:
             return { ...state, searchCategory: action.payload };
         case SET_FAVORITE_LIST_STATE:

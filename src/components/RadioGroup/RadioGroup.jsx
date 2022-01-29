@@ -2,7 +2,7 @@ import style from './RadioGroup.module.scss'
 import './RadioGroup.module.scss'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCategoryJoke, updateSearchJoke } from '../../store/chuckApi/types';
+import { updateCategoryJoke, updateSearchByInput } from '../../store/chuckApi/types';
 import RadioGroupCategories from '../RadioGroupCategories';
 
 const handleKeyPress = (event) => {
@@ -24,7 +24,7 @@ const RadioGroup = () => {
                     return (setOpenCategories(false),
                         setOpenSearch(false),
                         dispatch(updateCategoryJoke('')),
-                        dispatch(updateSearchJoke('')))
+                        dispatch(updateSearchByInput('')))
                 }} />
             <label htmlFor="random">Random</label>
         </div>
@@ -35,7 +35,7 @@ const RadioGroup = () => {
                 name="contact" value="fromCategories" onClick={() => {
                     return (setOpenCategories(true),
                         setOpenSearch(false),
-                        dispatch(updateSearchJoke('')),
+                        dispatch(updateSearchByInput('')),
                         dispatch(updateCategoryJoke(categoriesList[0])))
                 }} />
             <label htmlFor="fromCategories">From categories</label>
@@ -62,7 +62,7 @@ const RadioGroup = () => {
                 className={style.searchInput}
                 placeholder='Free text search...'
                 onKeyPress={(event) => handleKeyPress(event)}
-                onInput={(event) => dispatch(updateSearchJoke(event.target.value))}
+                onInput={(event) => dispatch(updateSearchByInput(event.target.value))}
             />
         </div>
     </form>

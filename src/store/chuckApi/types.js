@@ -1,6 +1,6 @@
 export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';
 export const SET_JOKE_LIST = 'SET_JOKE_LIST';
-export const UPDATE_SEARCH_JOKE = 'UPDATE_SEARCH_JOKE';
+export const UPDATE_SEARCH_BY_INPUT = 'UPDATE_SEARCH_BY_INPUT';
 export const UPDATE_CATEGORY_JOKE = 'UPDATE_CATEGORY_JOKE';
 export const SET_FAVORITE_LIST_STATE = 'SET_FAVORITE_LIST_STATE';
 export const SET_FAVORITE_JOKE_LIST = 'SET_FAVORITE_JOKE_LIST';
@@ -11,8 +11,8 @@ export const setCategoriesFromApi = (payload) => {
 export const setJokeFromApi = (payload) => {
     return { type: SET_JOKE_LIST, payload }
 }
-export const updateSearchJoke = (payload) => {
-    return { type: UPDATE_SEARCH_JOKE, payload }
+export const updateSearchByInput = (payload) => {
+    return { type: UPDATE_SEARCH_BY_INPUT, payload }
 }
 export const updateCategoryJoke = (payload) => {
     return { type: UPDATE_CATEGORY_JOKE, payload }
@@ -24,9 +24,9 @@ export const setFavoriteJokeList = (payload) => {
     return { type: SET_FAVORITE_JOKE_LIST, payload }
 }
 
-export const getCategoriesFromApi = () => async (dispatch) => {
+export const getCategoriesFromApi = () => (dispatch) => {
     const urlCategories = 'https://api.chucknorris.io/jokes/categories'
-    await fetch(urlCategories)
+    fetch(urlCategories)
         .then((response) => response.json())
         .then((data) => {
             return (dispatch(setCategoriesFromApi(data))
@@ -34,34 +34,26 @@ export const getCategoriesFromApi = () => async (dispatch) => {
         })
 }
 
-export const getJokeListFromApi = () => async (dispatch, getState) => {
+export const getJokeListFromApi = () => (dispatch, getState) => {
     const state = getState();
     const searchCategory = state.chuckApi.searchCategory;
-    const searchJoke = state.chuckApi.searchJoke;
+    const searchByInput = state.chuckApi.searchByInput;
     const url = {
         random: 'https://api.chucknorris.io/jokes/random',
         category: `https://api.chucknorris.io/jokes/random?category=${searchCategory}`,
-        query: `https://api.chucknorris.io/jokes/search?query=${searchJoke}`
+        byInput: `https://api.chucknorris.io/jokes/search?query=${searchByInput}`
     }
-    let queryUrl
-    if (!searchCategory && !searchJoke) {
-        queryUrl = url.random
-    } else if (searchJoke && !searchCategory) {
-        queryUrl = url.query
-    } else {
-        queryUrl = url.category
-    }
-    await fetch(queryUrl)
+    const isRandom = Boolean(!searchCategory && !searchByInput);
+    const isByInput = Boolean(searchByInput && !searchCategory);
+
+    const queryUrl = isRandom ? url.random : isByInput ? url.byInput : url.category
+    fetch(queryUrl)
         .then((response) => response.json())
         .then((data) => {
-            if (!!data.total === false && !!data.id !== true) {
-                return
-            } else if (!!data.error === true) {
-                return
-            } else {
-                const modifiedData = checkInFavoriteList(data, dispatch, getState);
-                return (dispatch(setJokeFromApi([])),
-                    dispatch(setJokeFromApi(modifiedData)))
+            const isError = !!data.total === false && !!data.id !== true && !!data.error === true;
+            if (!isError) {
+                const checkedData = checkInFavoriteList(data, dispatch, getState)
+                return (dispatch(setJokeFromApi([])), dispatch(setJokeFromApi(checkedData)))
             }
         })
 }
@@ -69,15 +61,11 @@ export const getJokeListFromApi = () => async (dispatch, getState) => {
 export const checkInFavoriteList = (results, dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
-    let modifiedArray = []
-    if (results.result !== undefined) {
-        results.result.map((item) => {
-            return modifiedArray.push(item)
-        })
-    } else {
-        modifiedArray.push(results)
-    }
-    const modifiedData = modifiedArray.map((item) => {
+
+    const isResultsResult = Boolean(results.result !== undefined);
+    const correctResults = isResultsResult === true ? results.result : [results];
+
+    const modifiedData = correctResults.map((item) => {
         const { categories, icon_url, id, updated_at, url, value } = item;
         const modifiedDataItem = {
             categories: !categories ? '' : categories,
@@ -90,27 +78,18 @@ export const checkInFavoriteList = (results, dispatch, getState) => {
         }
         return modifiedDataItem
     })
-    let checkType = favoriteJokeList === null ? 'initial' : 'compare with favoriteList'
-
-    function checkInFavoriteList(item) {
+    const checkInFavoriteList = (item) => {
         const jokesFavoriteList = favoriteJokeList.find(jokes => jokes.id === item.id)
         return Boolean(jokesFavoriteList) === true ? jokesFavoriteList : item;
     }
-    switch (checkType) {
-        case 'initial':
-            return modifiedData
-        case 'compare with favoriteList':
-            dispatch(setFavoriteJokeList(favoriteJokeList))
-            return modifiedData.map((item) => {
-                return checkInFavoriteList(item)
-            })
-        default:
-            return modifiedData
-    }
+    const isFavoriteJokeList = Boolean(favoriteJokeList === null)
+    return isFavoriteJokeList ? modifiedData :
+        (dispatch(setFavoriteJokeList(favoriteJokeList)),
+            modifiedData.map((item) => checkInFavoriteList(item)))
 }
 
 
-export const toFavoriteList = (categories, icon_url, id, updated_at, url, value, remove) => async (dispatch, getState) => {
+export const toFavoriteList = (categories, icon_url, id, updated_at, url, value, remove) => (dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
     const jokeList = state.chuckApi.jokeList;
