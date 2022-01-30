@@ -2,7 +2,7 @@ import style from './RadioGroup.module.scss'
 import './RadioGroup.module.scss'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCategoryJoke, updateSearchByInput } from '../../store/chuckApi/types';
+import { updateCategoryJoke, updateSearchByInput } from '../../store/chuckApi/actions';
 import RadioGroupCategories from '../RadioGroupCategories';
 
 const handleKeyPress = (event) => {
@@ -57,7 +57,6 @@ const RadioGroup = () => {
         </div>
         <div className={`${openSearch === false ? style.displayNone : style.displayBlock}`}>
             <input type="text"
-                minLength={3}
                 required="required"
                 className={style.searchInput}
                 placeholder='Free text search...'

@@ -5,7 +5,7 @@ import {
     UPDATE_CATEGORY_JOKE,
     SET_FAVORITE_LIST_STATE,
     SET_FAVORITE_JOKE_LIST
-} from './types';
+} from './actions';
 
 export const chuckApi = (
     state = {

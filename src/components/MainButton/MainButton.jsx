@@ -1,6 +1,6 @@
 import style from './MainButton.module.css'
 import { useDispatch } from 'react-redux';
-import { getJokeListFromApi } from '../../store/chuckApi/types';
+import { getJokeListFromApi } from '../../store/chuckApi/actions';
 
 const MainButton = () => {
     const dispatch = useDispatch();

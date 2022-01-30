@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import style from './AddToFavoriteButton.module.scss'
-import { addToFavoriteList, removeFromFavoriteList } from '../../store/chuckApi/types';
+import { addToFavoriteList, removeFromFavoriteList } from '../../store/chuckApi/actions';
 
 const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavorite = undefined, value, favoriteBlockStyle }) => {
     const dispatch = useDispatch();

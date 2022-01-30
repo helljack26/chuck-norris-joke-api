@@ -1,5 +1,5 @@
 import style from './RadioGroupCategories.module.scss'
-import { getCategoriesFromApi, updateCategoryJoke } from '../../store/chuckApi/types';
+import { getCategoriesFromApi, updateCategoryJoke } from '../../store/chuckApi/actions';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

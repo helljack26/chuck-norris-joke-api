@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import FavoriteHeader from '../FavoriteHeader';
 import JokeBlockItem from '../JokeBlockItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFavoriteJokeList } from '../../store/chuckApi/types';
+import { setFavoriteJokeList } from '../../store/chuckApi/actions';
 
 const initialSetOnlyInFavoriteItem = () => {
     let initial = false;

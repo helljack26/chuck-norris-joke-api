@@ -1,5 +1,5 @@
 import './FavoriteHeaderTablet.css'
-import { setFavoriteListState } from '../../store/chuckApi/types';
+import { setFavoriteListState } from '../../store/chuckApi/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const FavoriteHeaderTablet = () => {
