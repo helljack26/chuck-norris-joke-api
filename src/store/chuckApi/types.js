@@ -50,7 +50,7 @@ export const getJokeListFromApi = () => (dispatch, getState) => {
     fetch(queryUrl)
         .then((response) => response.json())
         .then((data) => {
-            const isError = !!data.total === false && !!data.id !== true && !!data.error === true;
+            const isError = Boolean(data.total === false && !!data.id !== true && !!data.error === true);
             if (!isError) {
                 const checkedData = checkInFavoriteList(data, dispatch, getState)
                 return (dispatch(setJokeFromApi([])), dispatch(setJokeFromApi(checkedData)))
@@ -65,9 +65,9 @@ export const checkInFavoriteList = (results, dispatch, getState) => {
     const isResultsResult = Boolean(results.result !== undefined);
     const correctResults = isResultsResult === true ? results.result : [results];
 
-    const modifiedData = correctResults.map((item) => {
+    const modifiedResults = correctResults.map((item) => {
         const { categories, icon_url, id, updated_at, url, value } = item;
-        const modifiedDataItem = {
+        const modifiedResultsItem = {
             categories: !categories ? '' : categories,
             icon_url: !icon_url ? '' : icon_url,
             id: id,
@@ -76,61 +76,71 @@ export const checkInFavoriteList = (results, dispatch, getState) => {
             value: value,
             inFavorite: false
         }
-        return modifiedDataItem
+        return modifiedResultsItem
     })
     const checkInStateFavoriteList = (item) => {
         const foundJoke = favoriteJokeList.find(jokes => jokes.id === item.id)
         return Boolean(foundJoke) === true ? foundJoke : item;
     }
-    const isFavoriteJokeList = Boolean(favoriteJokeList === null)
-    return isFavoriteJokeList ? modifiedData :
+    const isFavoriteJokeList = Boolean(favoriteJokeList === null);
+    return isFavoriteJokeList ? modifiedResults :
         (dispatch(setFavoriteJokeList(favoriteJokeList)),
-            modifiedData.map((item) => checkInStateFavoriteList(item)))
+            modifiedResults.map((item) => checkInStateFavoriteList(item)))
 }
 
-export const toFavoriteList = (categories, icon_url, id, updated_at, url, value, remove) => (dispatch, getState) => {
+export const dispathAll = (jokeList, favoriteJokeList) => (dispatch) => {
+    return (localStorage.setItem('favoriteList', JSON.stringify(favoriteJokeList)),
+        dispatch(setJokeFromApi([])),
+        dispatch(setJokeFromApi(jokeList)),
+        dispatch(setFavoriteJokeList([])),
+        dispatch(setFavoriteJokeList(favoriteJokeList)))
+}
+
+export const addToFavoriteList = (categories, icon_url, id, updated_at, url, value) => (dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
     const jokeList = state.chuckApi.jokeList;
 
-    const checkFavoriteList = !!favoriteJokeList.find(joke => joke.id === id)
-    const checkJokeList = !!jokeList.find(joke => joke.id === id)
-    if (remove === true) {
-        if (checkJokeList === false) {
-            favoriteJokeList.find(joke => joke.id === id).inFavorite = false;
-        } else if (checkJokeList === true) {
-            favoriteJokeList.find(joke => joke.id === id).inFavorite = false;
-            jokeList.find(joke => joke.id === id).inFavorite = false;
-        } else {
-            return
-        }
-    } else {
-        if (checkFavoriteList === true && checkJokeList === true) {
-            favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
-            jokeList.find(joke => joke.id === id).inFavorite = true;
-        } else {
-            if (checkJokeList === true) {
-                jokeList.find(joke => joke.id === id).inFavorite = true;
-                const newInFavoriteItem = {
-                    categories: categories,
-                    icon_url: icon_url,
-                    id: id,
-                    updated_at: updated_at,
-                    url: url,
-                    value: value,
-                    inFavorite: true
-                }
-                favoriteJokeList.unshift(newInFavoriteItem)
-            }
-            favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
-        }
+    const isExistInFavoriteList = Boolean(favoriteJokeList.find(joke => joke.id === id));
+    const isExistInJokeList = Boolean(jokeList.find(joke => joke.id === id));
+
+    const isExistInBothList = isExistInJokeList === true && isExistInFavoriteList === true;
+    const existOnlyInJokeList = isExistInJokeList === true && isExistInFavoriteList === false;
+    const existOnlyInFavoriteJokeList = isExistInJokeList === false && isExistInFavoriteList === false;
+
+    if (isExistInBothList) {
+        favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
+        jokeList.find(joke => joke.id === id).inFavorite = true;
     }
-
-    localStorage.setItem('favoriteList', JSON.stringify(favoriteJokeList))
-    dispatch(setJokeFromApi([]))
-    dispatch(setJokeFromApi(jokeList))
-    dispatch(setFavoriteJokeList([]))
-    dispatch(setFavoriteJokeList(favoriteJokeList))
-    return
+    if (existOnlyInJokeList) {
+        jokeList.find(joke => joke.id === id).inFavorite = true;
+        const newInFavoriteItem = {
+            categories: categories,
+            icon_url: icon_url,
+            id: id,
+            updated_at: updated_at,
+            url: url,
+            value: value,
+            inFavorite: true
+        }
+        favoriteJokeList.unshift(newInFavoriteItem)
+    }
+    if (existOnlyInFavoriteJokeList) {
+        favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
+    }
+    return dispatch(dispathAll(jokeList, favoriteJokeList))
 }
+export const removeFromFavoriteList = (id) => (dispatch, getState) => {
+    const state = getState();
+    const favoriteJokeList = state.chuckApi.favoriteJokeList;
+    const jokeList = state.chuckApi.jokeList;
 
+    const isExistInJokeList = Boolean(jokeList.find(joke => joke.id === id))
+    if (isExistInJokeList) {
+        favoriteJokeList.find(joke => joke.id === id).inFavorite = false;
+        jokeList.find(joke => joke.id === id).inFavorite = false;
+    } else {
+        favoriteJokeList.find(joke => joke.id === id).inFavorite = false;
+    }
+    return dispatch(dispathAll(jokeList, favoriteJokeList))
+}
