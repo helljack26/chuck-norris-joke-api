@@ -20,7 +20,7 @@ const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavo
                 }} />
         </button>
         : <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
-            <img src='./img/icon/heart_stroke.svg' alt="Add to Favorite list"
+            <img src='./img/icon/heart_stroke.svg' alt="Add to Favorite Button"
                 className={style.notInFavorite}
                 onClick={() => {
                     return (dispatch(addToFavoriteList(categories, icon_url, id, updated_at, url, value)),

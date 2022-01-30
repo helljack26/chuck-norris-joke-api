@@ -2,6 +2,7 @@ import './FavoriteBlock.css';
 import { useSelector } from 'react-redux';
 import FavoriteHeader from '../FavoriteHeader';
 import JokeBlockItem from '../JokeBlockItem';
+
 const FavoriteBlock = ({ screenType, favoriteJokeList }) => {
     const favoriteListStateBtn = useSelector(state => state.chuckApi.favoriteListStateBtn);
     const isDesktop = screenType === 'desktop' ? true : false;

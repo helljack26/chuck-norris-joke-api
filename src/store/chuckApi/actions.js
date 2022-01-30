@@ -87,6 +87,7 @@ export const checkInFavoriteList = (results, dispatch, getState) => {
         return Boolean(foundJoke) === true ? foundJoke : item;
     }
     const isFavoriteJokeList = Boolean(favoriteJokeList === null);
+
     return isFavoriteJokeList ? modifiedResults :
         (dispatch(setFavoriteJokeList(favoriteJokeList)),
             modifiedResults.map((item) => checkInStateFavoriteList(item)))

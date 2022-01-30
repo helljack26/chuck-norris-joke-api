@@ -12,6 +12,9 @@ const countLastUpdate = (date) => {
 const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
     const { categories, icon_url, id, updated_at, url, value, inFavorite } = jokeData;
 
+    const isCategories = Boolean(categories)
+    const isCategoriesLength = isCategories ? categories.length !== 0 ? true : false : null;
+
     return (
         <div className={favoriteBlockStyle === undefined ? style.jokeBlockItem : style.jokeBlockFavoriteItem}>
             <div className={style.icon}>
@@ -29,8 +32,7 @@ const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
                 <p className={style.text}>{value}</p>
                 <div className={style.jokeFooter}>
                     {updated_at !== undefined ? <p className={style.lastUpdate}>Last update: {countLastUpdate(updated_at)} days ago.</p> : null}
-                    {categories ? categories.length !== 0 && categories.length !== undefined ? <p className={style.categories}>
-                        {categories}</p> : null : null}
+                    {isCategoriesLength ? <p className={style.categories}>{categories}</p> : null}
                 </div>
             </div>
         </div>
