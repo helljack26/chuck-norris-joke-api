@@ -23,7 +23,8 @@ const Favorite = () => {
 
     useEffect(() => {
         const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
-        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? initialSetOnlyInFavoriteItem() : []; dispatch(setFavoriteJokeList(cleanFavoriteList))
+        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? initialSetOnlyInFavoriteItem() : [];
+        dispatch(setFavoriteJokeList(cleanFavoriteList))
     }, [dispatch])
 
     return (isFavoriteList === true ?
@@ -42,7 +43,7 @@ const Favorite = () => {
             </aside>
 
             <aside className={`${'favoriteTablet'} ${favoriteListStateBtn === false ? 'favoriteBlockClosed' : 'favoriteBlockOpened'}`} >
-                <div className={'favoriteTabletBlock'}>
+                <div className='favoriteTabletBlock'>
                     {favoriteJokeList ? favoriteJokeList.map((jokeData, key) => {
                         return (
                             <JokeBlockItem jokeData={jokeData} key={key} favoriteBlockStyle={true} />

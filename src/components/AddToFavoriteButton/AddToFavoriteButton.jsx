@@ -7,7 +7,7 @@ const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavo
     const dispatch = useDispatch();
     const [type, setType] = useState()
     useEffect(() => {
-        return inFavorite !== undefined ? setType(inFavorite) : null
+        return inFavorite !== undefined ? setType(inFavorite) : null;
     }, [setType, inFavorite])
 
     return type === true ?
@@ -21,7 +21,8 @@ const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavo
         </button>
         : <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
             <img src='./img/icon/heart_stroke.svg' alt="Add to Favorite list"
-                className={style.notInFavorite} onClick={() => {
+                className={style.notInFavorite}
+                onClick={() => {
                     return (dispatch(addToFavoriteList(categories, icon_url, id, updated_at, url, value)),
                         setType(true))
                 }} />

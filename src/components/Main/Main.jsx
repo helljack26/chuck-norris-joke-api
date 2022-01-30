@@ -1,14 +1,12 @@
 import style from './Main.module.css'
 import RadioGroup from '../RadioGroup';
-import JokeBlockItem from '../JokeBlockItem';
-import { useDispatch, useSelector } from 'react-redux';
+import MainJokesBlock from '../MainJokesBlock';
+import { useDispatch } from 'react-redux';
 import { getJokeListFromApi } from '../../store/chuckApi/types';
 
 const Main = () => {
     const dispatch = useDispatch();
-    const jokeList = useSelector(state => state.chuckApi.jokeList);
     // const searchJoke = useSelector(state => state.chuckApi.searchJoke);
-    const isJokeList = Boolean(jokeList);
     // const isSearchMin = Boolean(searchJoke.length < 3)
 
     return <main>
@@ -23,13 +21,7 @@ const Main = () => {
         <button type='button' className={style.radioGroupBtn}
             onClick={() => dispatch(getJokeListFromApi())}
         >Get a joke</button>
-        <div className={style.jokesBlock}>
-            {isJokeList ? jokeList.map((jokeData, key) => {
-                return (
-                    <JokeBlockItem jokeData={jokeData} key={key} />
-                )
-            }) : ''}
-        </div>
+        <MainJokesBlock />
     </main>
 
 }
