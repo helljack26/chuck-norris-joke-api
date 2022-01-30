@@ -2,6 +2,7 @@ export const SET_CATEGORIES_LIST = 'SET_CATEGORIES_LIST';
 export const SET_JOKE_LIST = 'SET_JOKE_LIST';
 export const UPDATE_SEARCH_BY_INPUT = 'UPDATE_SEARCH_BY_INPUT';
 export const UPDATE_CATEGORY_JOKE = 'UPDATE_CATEGORY_JOKE';
+export const SET_RADIO_SEARCH_STATE = 'SET_RADIO_SEARCH_STATE';
 export const SET_FAVORITE_LIST_STATE = 'SET_FAVORITE_LIST_STATE';
 export const SET_FAVORITE_JOKE_LIST = 'SET_FAVORITE_JOKE_LIST';
 
@@ -16,6 +17,9 @@ export const updateSearchByInput = (payload) => {
 }
 export const updateCategoryJoke = (payload) => {
     return { type: UPDATE_CATEGORY_JOKE, payload }
+}
+export const setRadioSearchState = (payload) => {
+    return { type: SET_RADIO_SEARCH_STATE, payload }
 }
 export const setFavoriteListState = (payload) => {
     return { type: SET_FAVORITE_LIST_STATE, payload }

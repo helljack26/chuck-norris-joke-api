@@ -2,7 +2,7 @@ import style from './RadioGroup.module.scss'
 import './RadioGroup.module.scss'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCategoryJoke, updateSearchByInput } from '../../store/chuckApi/actions';
+import { updateCategoryJoke, updateSearchByInput, setRadioSearchState } from '../../store/chuckApi/actions';
 import RadioGroupCategories from '../RadioGroupCategories';
 
 const handleKeyPress = (event) => {
@@ -12,9 +12,9 @@ const handleKeyPress = (event) => {
 }
 const RadioGroup = () => {
     const categoriesList = useSelector(state => state.chuckApi.categoriesList)
+    const radioSearchState = useSelector(state => state.chuckApi.radioSearchState)
     const dispatch = useDispatch();
     const [openCategories, setOpenCategories] = useState(false);
-    const [openSearch, setOpenSearch] = useState(false);
 
     return <form className={style.radioGroup}>
         {/* Random */}
@@ -22,7 +22,7 @@ const RadioGroup = () => {
             <input type="radio" className={style.radioBtn} id="random"
                 name="contact" value="random" defaultChecked onClick={() => {
                     return (setOpenCategories(false),
-                        setOpenSearch(false),
+                        dispatch(setRadioSearchState(false)),
                         dispatch(updateCategoryJoke('')),
                         dispatch(updateSearchByInput('')))
                 }} />
@@ -34,7 +34,7 @@ const RadioGroup = () => {
             <input type="radio" className={style.radioBtn} id="fromCategories"
                 name="contact" value="fromCategories" onClick={() => {
                     return (setOpenCategories(true),
-                        setOpenSearch(false),
+                        dispatch(setRadioSearchState(false)),
                         dispatch(updateSearchByInput('')),
                         dispatch(updateCategoryJoke(categoriesList[0])))
                 }} />
@@ -50,12 +50,12 @@ const RadioGroup = () => {
                 name="contact" value="search" onClick={() => {
                     return (
                         setOpenCategories(false),
-                        setOpenSearch(true),
+                        dispatch(setRadioSearchState(true)),
                         dispatch(updateCategoryJoke('')))
                 }} />
             <label htmlFor="search">Search</label>
         </div>
-        <div className={`${openSearch === false ? style.displayNone : style.displayBlock}`}>
+        <div className={`${radioSearchState === false ? style.displayNone : style.displayBlock}`}>
             <input type="text"
                 required="required"
                 className={style.searchInput}

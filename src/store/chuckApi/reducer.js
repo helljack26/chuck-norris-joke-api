@@ -3,6 +3,7 @@ import {
     SET_JOKE_LIST,
     UPDATE_SEARCH_BY_INPUT,
     UPDATE_CATEGORY_JOKE,
+    SET_RADIO_SEARCH_STATE,
     SET_FAVORITE_LIST_STATE,
     SET_FAVORITE_JOKE_LIST
 } from './actions';
@@ -13,6 +14,7 @@ export const chuckApi = (
         jokeList: [],
         searchByInput: '',
         searchCategory: '',
+        radioSearchState: false,
         favoriteListStateBtn: false,
         favoriteJokeList: []
     }, action,) => {
@@ -25,6 +27,8 @@ export const chuckApi = (
             return { ...state, searchByInput: action.payload };
         case UPDATE_CATEGORY_JOKE:
             return { ...state, searchCategory: action.payload };
+        case SET_RADIO_SEARCH_STATE:
+            return { ...state, radioSearchState: action.payload };
         case SET_FAVORITE_LIST_STATE:
             return { ...state, favoriteListStateBtn: action.payload };
         case SET_FAVORITE_JOKE_LIST:
