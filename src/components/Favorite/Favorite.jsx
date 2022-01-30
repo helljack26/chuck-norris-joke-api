@@ -28,10 +28,10 @@ const Favorite = () => {
 
     return (isFavoriteList === true ?
         <>
-            <FavoriteHeader type={'tablet'} />
+            <FavoriteHeader screenType='tablet' />
 
             <aside className='favoriteBlockDesktop'>
-                <FavoriteHeader type={'desktop'} />
+                <FavoriteHeader screenType='desktop' />
                 <div className='favoriteJokeBlock'>
                     {favoriteJokeList ? favoriteJokeList.map((jokeData, key) => {
                         return (

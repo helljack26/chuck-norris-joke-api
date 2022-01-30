@@ -1,0 +1,11 @@
+.favoriteHeaderDesktop {
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    display: block;
+}
+.favoriteHeaderText {
+    font-size: 1.35rem;
+    color: rgb(167, 167, 167);
+    user-select: none;
+}

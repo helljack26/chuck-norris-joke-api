@@ -1,32 +1,15 @@
-import './FavoriteHeader.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { setFavoriteListState } from '../../store/chuckApi/types';
-const FavoriteHeader = ({ type }) => {
-    const dispatch = useDispatch();
-    const favoriteListStateBtn = useSelector(state => state.chuckApi.favoriteListStateBtn);
+import { useSelector } from 'react-redux';
+import FavoriteHeaderDesktop from '../FavoriteHeaderDesktop';
+import FavoriteHeaderTablet from '../FavoriteHeaderTablet';
+const FavoriteHeader = ({ screenType }) => {
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
-    const isFavoriteList = Boolean(favoriteJokeList.length)
+    const isExistFavoriteList = Boolean(favoriteJokeList.length) === true;
 
-    return isFavoriteList === true ? type === 'desktop' ?
-        < div className='favoriteHeaderDesktop' >
-            <p className='favoriteHeaderText'>Favorite</p>
-        </ div>
+    return isExistFavoriteList ? screenType === 'desktop' ?
+        <FavoriteHeaderDesktop />
         :
-        <div className={`${'favoriteHeaderTablet'} ${favoriteListStateBtn === true ? 'favoriteHeaderTabletActive' : ''}`} >
-            <button className='favoriteBtn'
-                onClick={() => {
-                    return favoriteListStateBtn === false ?
-                        dispatch(setFavoriteListState(true)) :
-                        dispatch(setFavoriteListState(false))
-                }}>
-                <img src={favoriteListStateBtn === false ?
-                    './img/icon/burgerMenu.svg' :
-                    './img/icon/burgerMenuClose.svg'} alt="Burger menu button" />
-            </button>
-            <p className='favoriteHeaderText'>Favorite</p>
-        </div>
+        <FavoriteHeaderTablet />
         : null
-
 }
 
 export default FavoriteHeader; 

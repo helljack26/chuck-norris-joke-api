@@ -3,14 +3,6 @@ import { useDispatch } from 'react-redux';
 import style from './AddToFavoriteButton.module.scss'
 import { addToFavoriteList, removeFromFavoriteList } from '../../store/chuckApi/types';
 
-const buttonType = {
-    inFavorite: {
-        url: './img/icon/heart.svg'
-    },
-    notInFavorite: {
-        url: './img/icon/heart_stroke.svg'
-    }
-}
 const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavorite = undefined, value, favoriteBlockStyle }) => {
     const dispatch = useDispatch();
     const [type, setType] = useState()
