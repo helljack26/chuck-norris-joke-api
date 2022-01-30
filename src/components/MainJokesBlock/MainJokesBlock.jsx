@@ -1,5 +1,6 @@
 import JokeBlockItem from '../JokeBlockItem';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 const MainJokesBlock = () => {
     const jokeList = useSelector(state => state.chuckApi.jokeList);
     const isJokeList = Boolean(jokeList);
