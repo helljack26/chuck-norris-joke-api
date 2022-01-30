@@ -54,7 +54,7 @@ export const getJokeListFromApi = () => (dispatch, getState) => {
     fetch(queryUrl)
         .then((response) => response.json())
         .then((data) => {
-            const isError = Boolean(data.total === false && !!data.id !== true && !!data.error === true);
+            const isError = Boolean(!!data.total === false && !!data.id === false && !!data.error === true);
             if (!isError) {
                 const checkedData = checkInFavoriteList(data, dispatch, getState)
                 return (dispatch(setJokeFromApi([])), dispatch(setJokeFromApi(checkedData)))
