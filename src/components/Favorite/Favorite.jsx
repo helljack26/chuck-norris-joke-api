@@ -26,6 +26,7 @@ const Favorite = () => {
         dispatch(setFavoriteJokeList(cleanFavoriteList))
     }, [dispatch])
 
+
     return (isFavoriteList === true ?
         <>
             <FavoriteHeader screenType='tablet' />
