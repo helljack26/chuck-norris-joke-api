@@ -8,16 +8,17 @@ const initialSetOnlyInFavoriteItem = () => {
     let initial = false;
     const localStorageFavoriteListJson = JSON.parse(window.localStorage.getItem('favoriteList'))
 
-    return localStorageFavoriteListJson !== null && !initial ? (
+    return localStorageFavoriteListJson !== null && initial === false ? (
         initial = true,
         localStorageFavoriteListJson.filter((item) => item.inFavorite === true))
-        : null
+        : [];
 };
 
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
-    const isFavoriteList = Boolean(favoriteJokeList)
+
+    const isFavoriteList = Boolean(favoriteJokeList.length)
     console.log(isFavoriteList);
 
     useEffect(() => {

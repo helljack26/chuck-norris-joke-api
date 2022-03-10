@@ -104,6 +104,7 @@ export const dispathAll = (jokeList, favoriteJokeList) => (dispatch) => {
 export const addToFavoriteList = (categories, icon_url, id, updated_at, url, value) => (dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
+
     const jokeList = state.chuckApi.jokeList;
 
     const isExistInFavoriteList = Boolean(favoriteJokeList.find(joke => joke.id === id));
