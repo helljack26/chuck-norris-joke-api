@@ -1,0 +1,63 @@
+.addIconBtn {
+  position: absolute;
+  top: 38px;
+  right: 40px;
+  border: none;
+  background-color: transparent;
+}
+
+.addIconFavoriteBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  border: none;
+  background-color: transparent;
+}
+
+.notInFavorite {
+  width: 20px;
+  height: 20px;
+  opacity: 0.55;
+  z-index: 50;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.inFavorite {
+  width: 20px;
+  height: 20px;
+  z-index: 50;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
+  position: relative;
+}
+
+.inFavorite:hover {
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
+}
+
+.addIcon:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+@media screen and (max-width: 385px) {
+  .detailsBtn {
+    width: 100%;
+    margin: 10px auto;
+  }
+}
+/*# sourceMappingURL=AddToFavoriteButton.module.css.map */

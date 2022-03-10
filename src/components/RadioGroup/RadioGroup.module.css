@@ -1,0 +1,102 @@
+.radioGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 50px;
+}
+
+.radioGroupItem {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 9px;
+}
+
+.radioBtn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background-color: var(--form-background);
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  border: 0.15em solid black;
+  border-radius: 50%;
+  -webkit-transform: translateY(-0.075em);
+          transform: translateY(-0.075em);
+  cursor: pointer;
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+}
+
+.radioBtn::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms -webkit-transform ease-in-out;
+  transition: 120ms transform ease-in-out;
+  transition: 120ms transform ease-in-out, 120ms -webkit-transform ease-in-out;
+  background-color: CanvasText;
+}
+
+.radioBtn:checked::before {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+label {
+  margin-left: 14px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.categoryBlock {
+  margin-bottom: 15px;
+}
+
+.searchInput {
+  min-width: 250px;
+  width: 41vw;
+  margin-top: 12px;
+  margin-left: 2px;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.searchInput::-webkit-input-placeholder {
+  font-size: 0.9rem;
+}
+
+.searchInput:-ms-input-placeholder {
+  font-size: 0.9rem;
+}
+
+.searchInput::-ms-input-placeholder {
+  font-size: 0.9rem;
+}
+
+.searchInput::placeholder {
+  font-size: 0.9rem;
+}
+
+.displayNone {
+  display: none;
+}
+
+.displayBlock {
+  display: block;
+}
+/*# sourceMappingURL=RadioGroup.module.css.map */

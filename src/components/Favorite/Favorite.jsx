@@ -17,7 +17,8 @@ const initialSetOnlyInFavoriteItem = () => {
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
-    const isFavoriteList = Boolean(favoriteJokeList.length)
+    const isFavoriteList = Boolean(favoriteJokeList)
+    console.log(isFavoriteList);
 
     useEffect(() => {
         const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
