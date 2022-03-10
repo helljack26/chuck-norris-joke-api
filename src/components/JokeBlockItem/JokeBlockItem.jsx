@@ -1,9 +1,19 @@
 import style from './JokeBlockItem.module.scss'
 import AddToFavoriteButton from '../AddToFavoriteButton';
-import countLastUpdate from '../helpers/countLastUpdate';
+
+const countLastUpdate = (date) => {
+    const lastUpdate = new Date(`${date.slice(0, 10).replace('-', '/').replace('-', '/')}`);
+    const now = new Date();
+    const difference = lastUpdate.getTime() - now.getTime();
+    const days = Math.abs(difference / (1000 * 3600 * 24));
+    return Math.ceil(days);
+}
 
 const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
     const { categories, icon_url, id, updated_at, url, value, inFavorite } = jokeData;
+
+    const isCategories = Boolean(categories)
+    const isCategoriesLength = isCategories ? categories.length !== 0 ? true : false : null;
 
     return (
         <div className={favoriteBlockStyle === undefined ? style.jokeBlockItem : style.jokeBlockFavoriteItem}>
@@ -22,8 +32,7 @@ const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
                 <p className={style.text}>{value}</p>
                 <div className={style.jokeFooter}>
                     {updated_at !== undefined ? <p className={style.lastUpdate}>Last update: {countLastUpdate(updated_at)} days ago.</p> : null}
-                    {categories ? categories.length !== 0 && categories.length !== undefined ? <p className={style.categories}>
-                        {categories}</p> : null : null}
+                    {isCategoriesLength ? <p className={style.categories}>{categories}</p> : null}
                 </div>
             </div>
         </div>

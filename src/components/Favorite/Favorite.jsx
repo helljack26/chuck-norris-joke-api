@@ -1,47 +1,38 @@
-import './Favorite.css';
 import { useEffect } from 'react';
 import FavoriteHeader from '../FavoriteHeader';
-import JokeBlockItem from '../JokeBlockItem';
-import removeAllNotInFavoriteItem from '../helpers/removeAllNotInFavoriteItem';
+import FavoriteBlock from '../FavoriteBlock';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFavoriteJokeList } from '../../store/chuckApi/types';
+import { setFavoriteJokeList } from '../../store/chuckApi/actions';
+
+const initialSetOnlyInFavoriteItem = () => {
+    let initial = false;
+    const localStorageFavoriteListJson = JSON.parse(window.localStorage.getItem('favoriteList'))
+
+    return localStorageFavoriteListJson !== null && !initial ? (
+        initial = true,
+        localStorageFavoriteListJson.filter((item) => item.inFavorite === true))
+        : null
+};
 
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
-    const favoriteListStateBtn = useSelector(state => state.chuckApi.favoriteListStateBtn);
+    const isFavoriteList = Boolean(favoriteJokeList.length)
 
     useEffect(() => {
-        const cleanLocalStorageFavoriteList = removeAllNotInFavoriteItem()
-        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? removeAllNotInFavoriteItem() : [];
+        const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
+        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? initialSetOnlyInFavoriteItem() : [];
         dispatch(setFavoriteJokeList(cleanFavoriteList))
     }, [dispatch])
-    
-    return (
+
+    return (isFavoriteList === true ?
         <>
-            <FavoriteHeader type={'tablet'} />
-
-            <aside className='favoriteBlockDesktop'>
-                <FavoriteHeader type={'desktop'} />
-                <div className='favoriteJokeBlock'>
-                    {favoriteJokeList ? favoriteJokeList.map((jokeData, key) => {
-                        return (
-                            <JokeBlockItem jokeData={jokeData} key={key} favoriteBlockStyle={true} />
-                        )
-                    }) : ''}
-                </div>
-            </aside>
-
-            <aside className={`${'favoriteTablet'} ${favoriteListStateBtn === false ? 'favoriteBlockClosed' : 'favoriteBlockOpened'}`} >
-                <div className={'favoriteTabletBlock'}>
-                    {favoriteJokeList ? favoriteJokeList.map((jokeData, key) => {
-                        return (
-                            <JokeBlockItem jokeData={jokeData} key={key} favoriteBlockStyle={true} />
-                        )
-                    }) : ''}
-                </div>
-            </aside>
+            <FavoriteHeader screenType='tablet' />
+            <FavoriteBlock screenType='desktop' favoriteJokeList={favoriteJokeList} />
+            <FavoriteBlock screenType='tablet' favoriteJokeList={favoriteJokeList} />
         </>
+        : null
+
     )
 }
 
