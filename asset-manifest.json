@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/chuck-norris-joke-api/static/css/main.7af30016.chunk.css",
+    "main.js": "/chuck-norris-joke-api/static/js/main.757bf26e.chunk.js",
+    "main.js.map": "/chuck-norris-joke-api/static/js/main.757bf26e.chunk.js.map",
+    "runtime-main.js": "/chuck-norris-joke-api/static/js/runtime-main.64f8cffd.js",
+    "runtime-main.js.map": "/chuck-norris-joke-api/static/js/runtime-main.64f8cffd.js.map",
+    "static/js/2.677230cf.chunk.js": "/chuck-norris-joke-api/static/js/2.677230cf.chunk.js",
+    "static/js/2.677230cf.chunk.js.map": "/chuck-norris-joke-api/static/js/2.677230cf.chunk.js.map",
+    "index.html": "/chuck-norris-joke-api/index.html",
+    "static/css/main.7af30016.chunk.css.map": "/chuck-norris-joke-api/static/css/main.7af30016.chunk.css.map",
+    "static/js/2.677230cf.chunk.js.LICENSE.txt": "/chuck-norris-joke-api/static/js/2.677230cf.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.64f8cffd.js",
+    "static/js/2.677230cf.chunk.js",
+    "static/css/main.7af30016.chunk.css",
+    "static/js/main.757bf26e.chunk.js"
+  ]
+}
