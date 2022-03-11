@@ -11,7 +11,7 @@ const initialSetOnlyInFavoriteItem = () => {
     return localStorageFavoriteListJson !== null && initial === false ? (
         initial = true,
         localStorageFavoriteListJson.filter((item) => item.inFavorite === true))
-        : [];
+        : undefined;
 };
 
 const Favorite = () => {
