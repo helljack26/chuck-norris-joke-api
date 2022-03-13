@@ -22,7 +22,7 @@ const Favorite = () => {
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
 
     const isFavoriteList = Boolean(favoriteJokeList.length)
-    console.log(isFavoriteList);
+    console.log('ffff');
 
     useEffect(() => {
         const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
@@ -30,6 +30,7 @@ const Favorite = () => {
             dispatch(setFavoriteJokeList(cleanLocalStorageFavoriteList))
         }
     }, [dispatch])
+
 
 
     return (isFavoriteList === true ?
