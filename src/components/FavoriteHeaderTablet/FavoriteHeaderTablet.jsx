@@ -25,4 +25,5 @@ const FavoriteHeaderTablet = () => {
     </div>
 }
 
+
 export default FavoriteHeaderTablet;
