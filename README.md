@@ -1,5 +1,7 @@
   ## Jokes about Chuck Norris from [Chuck Norris DB](https://api.chucknorris.io/)
   
+ [Here](https://helljack26.github.io/chuck-norris-joke-api/) is published project by github-pages.
+  
  Display jokes with using API [Chuck Norris](https://api.chucknorris.io/).  
 
  Manage your favoritelist(`localstorage`).  
