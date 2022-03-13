@@ -1,5 +1,6 @@
 import style from './JokeBlockItem.module.scss'
 import AddToFavoriteButton from '../AddToFavoriteButton';
+import externalLinkIcon from '../img/icon/external-link.svg';
 
 const countLastUpdate = (date) => {
     const lastUpdate = new Date(`${date.slice(0, 10).replace('-', '/').replace('-', '/')}`);
@@ -26,7 +27,7 @@ const JokeBlockItem = ({ jokeData, favoriteBlockStyle }) => {
                 <div className={style.idBlock}>
                     <p className={style.id}>ID:</p>
                     <a href={url} className={style.linkText}>{id}
-                        <img src="./img/icon/external-link.svg" className={style.linkIcon} alt="Icon external link" />
+                        <img src={externalLinkIcon} className={style.linkIcon} alt="Icon external link" />
                     </a>
                 </div>
                 <p className={style.text}>{value}</p>

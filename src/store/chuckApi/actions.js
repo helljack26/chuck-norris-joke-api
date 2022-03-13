@@ -65,7 +65,7 @@ export const getJokeListFromApi = () => (dispatch, getState) => {
 export const checkInFavoriteList = (results, dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
-
+    console.log(favoriteJokeList);
     const isResultsResult = Boolean(results.result !== undefined);
     const correctResults = isResultsResult === true ? results.result : [results];
 

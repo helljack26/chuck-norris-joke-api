@@ -6,12 +6,13 @@ import { setFavoriteJokeList } from '../../store/chuckApi/actions';
 
 const initialSetOnlyInFavoriteItem = () => {
     let initial = false;
-    const localStorageFavoriteListJson = JSON.parse(window.localStorage.getItem('favoriteList'))
-
-    return localStorageFavoriteListJson !== null && !initial ? (
-        initial = true,
-        localStorageFavoriteListJson.filter((item) => item.inFavorite === true))
-        : null
+    if (window.localStorage.getItem('favoriteList') !== null) {
+        const localStorageFavoriteListJson = JSON.parse(window.localStorage.getItem('favoriteList'))
+        if (initial === false) {
+            initial = true
+            return localStorageFavoriteListJson.filter((item) => item.inFavorite === true)
+        }
+    }
 };
 
 const Favorite = () => {
@@ -21,8 +22,9 @@ const Favorite = () => {
 
     useEffect(() => {
         const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
-        const cleanFavoriteList = cleanLocalStorageFavoriteList !== undefined ? initialSetOnlyInFavoriteItem() : [];
-        dispatch(setFavoriteJokeList(cleanFavoriteList))
+        if (cleanLocalStorageFavoriteList !== undefined) {
+            dispatch(setFavoriteJokeList(cleanLocalStorageFavoriteList))
+        }
     }, [dispatch])
 
     return (isFavoriteList === true ?
