@@ -15,6 +15,7 @@ const initialSetOnlyInFavoriteItem = () => {
     }
 };
 
+
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
