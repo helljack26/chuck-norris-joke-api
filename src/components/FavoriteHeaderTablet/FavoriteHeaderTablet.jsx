@@ -1,8 +1,8 @@
 import './FavoriteHeaderTablet.css'
 import { setFavoriteListState } from '../../store/chuckApi/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import burgerMenuOpen from '../img/icon/burgerMenu.svg'
-import burgerMenuClosed from '../img/icon/burgerMenuClose.svg'
+import burgerMenuOpen from '../img/icon/burgerMenu.svg';
+import burgerMenuClosed from '../img/icon/burgerMenuClose.svg';
 const FavoriteHeaderTablet = () => {
     const dispatch = useDispatch();
     const favoriteListStateBtn = useSelector(state => state.chuckApi.favoriteListStateBtn);
@@ -18,10 +18,11 @@ const FavoriteHeaderTablet = () => {
                     dispatch(setFavoriteListState(false))
             }}>
             <img src={isClosedFavoriteList ?
-                { burgerMenuOpen } :
-                { burgerMenuClosed }} alt="Burger menu button" />
+                burgerMenuOpen :
+                burgerMenuClosed} alt="Burger menu button" />
         </button>
         <p className='favoriteHeaderText'>Favorite</p>
     </div>
 }
+
 export default FavoriteHeaderTablet;
