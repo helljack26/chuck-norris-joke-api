@@ -24,6 +24,4 @@ const FavoriteHeaderTablet = () => {
         <p className='favoriteHeaderText'>Favorite</p>
     </div>
 }
-
-
 export default FavoriteHeaderTablet;
