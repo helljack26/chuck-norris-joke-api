@@ -54,7 +54,7 @@ export const getJokeListFromApi = () => (dispatch, getState) => {
     fetch(queryUrl)
         .then((response) => response.json())
         .then((data) => {
-            const isError = Boolean(!!data.total === false && !!data.id === false && !!data.error === true);
+            const isError = !!data.total === false && !!data.id === false && !!data.error === true;
             if (!isError) {
                 const checkedData = checkInFavoriteList(data, dispatch, getState)
                 return (dispatch(setJokeFromApi([])), dispatch(setJokeFromApi(checkedData)))
@@ -65,7 +65,7 @@ export const getJokeListFromApi = () => (dispatch, getState) => {
 export const checkInFavoriteList = (results, dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
-    console.log(favoriteJokeList);
+  
     const isResultsResult = Boolean(results.result !== undefined);
     const correctResults = isResultsResult === true ? results.result : [results];
 
@@ -104,14 +104,15 @@ export const dispathAll = (jokeList, favoriteJokeList) => (dispatch) => {
 export const addToFavoriteList = (categories, icon_url, id, updated_at, url, value) => (dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
+
     const jokeList = state.chuckApi.jokeList;
 
     const isExistInFavoriteList = Boolean(favoriteJokeList.find(joke => joke.id === id));
     const isExistInJokeList = Boolean(jokeList.find(joke => joke.id === id));
 
-    const isExistInBothList = isExistInJokeList === true && isExistInFavoriteList === true;
-    const existOnlyInJokeList = isExistInJokeList === true && isExistInFavoriteList === false;
-    const existOnlyInFavoriteJokeList = isExistInJokeList === false && isExistInFavoriteList === false;
+    const isExistInBothList = isExistInJokeList && isExistInFavoriteList;
+    const existOnlyInJokeList = isExistInJokeList && isExistInFavoriteList;
+    const existOnlyInFavoriteJokeList = isExistInJokeList && isExistInFavoriteList;
 
     if (isExistInBothList) {
         favoriteJokeList.find(joke => joke.id === id).inFavorite = true;

@@ -5,6 +5,9 @@ import { addToFavoriteList, removeFromFavoriteList } from '../../store/chuckApi/
 import heartIcon from '../img/icon/heart.svg'
 import heartStrokeIcon from '../img/icon/heart_stroke.svg'
 
+import heart from '../../img/icon/heart.svg';
+import heartStroke from '../../img/icon/heart_stroke.svg';
+
 const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavorite = undefined, value, favoriteBlockStyle }) => {
     const dispatch = useDispatch();
     const [type, setType] = useState()
