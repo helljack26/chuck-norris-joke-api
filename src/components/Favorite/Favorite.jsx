@@ -15,14 +15,10 @@ const initialSetOnlyInFavoriteItem = () => {
     }
 };
 
-
-
 const Favorite = () => {
     const dispatch = useDispatch();
     const favoriteJokeList = useSelector(state => state.chuckApi.favoriteJokeList);
-
     const isFavoriteList = Boolean(favoriteJokeList.length)
-    console.log('ffff');
 
     useEffect(() => {
         const cleanLocalStorageFavoriteList = initialSetOnlyInFavoriteItem()
@@ -31,8 +27,6 @@ const Favorite = () => {
         }
     }, [dispatch])
 
-
-
     return (isFavoriteList === true ?
         <>
             <FavoriteHeader screenType='tablet' />
@@ -40,7 +34,6 @@ const Favorite = () => {
             <FavoriteBlock screenType='tablet' favoriteJokeList={favoriteJokeList} />
         </>
         : null
-
     )
 }
 
