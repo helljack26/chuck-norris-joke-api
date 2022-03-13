@@ -65,7 +65,7 @@ export const getJokeListFromApi = () => (dispatch, getState) => {
 export const checkInFavoriteList = (results, dispatch, getState) => {
     const state = getState();
     const favoriteJokeList = state.chuckApi.favoriteJokeList;
-  
+
     const isResultsResult = Boolean(results.result !== undefined);
     const correctResults = isResultsResult === true ? results.result : [results];
 
@@ -111,13 +111,14 @@ export const addToFavoriteList = (categories, icon_url, id, updated_at, url, val
     const isExistInJokeList = Boolean(jokeList.find(joke => joke.id === id));
 
     const isExistInBothList = isExistInJokeList && isExistInFavoriteList;
-    const existOnlyInJokeList = isExistInJokeList && isExistInFavoriteList;
-    const existOnlyInFavoriteJokeList = isExistInJokeList && isExistInFavoriteList;
+    const existOnlyInJokeList = isExistInJokeList && !isExistInFavoriteList;
+    const existOnlyInFavoriteJokeList = !isExistInJokeList && isExistInFavoriteList;
 
     if (isExistInBothList) {
         favoriteJokeList.find(joke => joke.id === id).inFavorite = true;
         jokeList.find(joke => joke.id === id).inFavorite = true;
     }
+
     if (existOnlyInJokeList) {
         jokeList.find(joke => joke.id === id).inFavorite = true;
         const newInFavoriteItem = {
