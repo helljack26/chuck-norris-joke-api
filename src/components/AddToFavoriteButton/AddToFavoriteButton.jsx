@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import style from './AddToFavoriteButton.module.scss'
 import { addToFavoriteList, removeFromFavoriteList } from '../../store/chuckApi/actions';
+import heartIcon from '../img/icon/heart.svg'
+import heartStrokeIcon from '../img/icon/heart_stroke.svg'
 
 import heart from '../../img/icon/heart.svg';
 import heartStroke from '../../img/icon/heart_stroke.svg';
@@ -15,7 +17,7 @@ const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavo
 
     return type === true ?
         <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
-            <img src={heart} alt='In favorite button'
+            <img src={heartIcon} alt='In favorite button'
                 className={style.inFavorite}
                 onClick={() => {
                     return (dispatch(removeFromFavoriteList(id)),
@@ -23,7 +25,7 @@ const AddToFavoriteButton = ({ categories, icon_url, id, updated_at, url, inFavo
                 }} />
         </button>
         : <button type='button' className={!favoriteBlockStyle ? style.addIconBtn : style.addIconFavoriteBtn}>
-            <img src={heartStroke} alt="Add to Favorite Button"
+            <img src={heartStrokeIcon} alt="Add to Favorite Button"
                 className={style.notInFavorite}
                 onClick={() => {
                     return (dispatch(addToFavoriteList(categories, icon_url, id, updated_at, url, value)),
